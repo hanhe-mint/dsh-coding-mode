@@ -1,0 +1,4 @@
+{
+  "title": "Coding Mode",
+  "description": "Task-aware coding workflow: first-turn classification, planning persona, plan gate, role-based model routing for subagents (plan/execute/verify/red-team), and a loop guard. Model routes are editable in Settings and default to the dieqiyun relay."
+}

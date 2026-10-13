@@ -1,0 +1,50 @@
+{
+  "name": "dsh-coding-mode",
+  "version": "0.6.0",
+  "type": "module",
+  "private": true,
+  "description": "DSH 编程模式插件（基础版）：编程模式 + 提示词卫生。两个组件可在「设置 → 插件 → 包含的组件」里逐个开关。",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "coding-agent",
+    "workflow"
+  ],
+  "main": "./bundle/index.js",
+  "exports": {
+    ".": "./bundle/index.js",
+    "./preset": "./bundle/preset.js",
+    "./client": "./bundle/client.js",
+    "./cordis.patch.yml": "./bundle/cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./bundle/cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings-plugins"
+      ],
+      "external": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "scripts": {
+    "test": "npm run test:protocol && npm run test:smoke && npm run test:client",
+    "test:protocol": "node --test bundle/protocol.test.mjs",
+    "test:smoke": "cd test && node --import ./register.mjs --test smoke.test.mjs",
+    "test:client": "cd test && node --test client.test.mjs"
+  },
+  "dependencies": {
+    "dsh-prompt-hygiene": "file:./prompt-hygiene"
+  }
+}

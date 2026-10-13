@@ -1,0 +1,42 @@
+{
+  "name": "@local/dsh-effort-switcher",
+  "version": "1.1.0",
+  "description": "DSH插件：把模型/推理强度入口换成推理强度滑动条（基于 lemonorangeapple/dsh-effort-switcher 修改，适配 DSH 0.2.0 桌面端 profile）。",
+  "type": "module",
+  "main": "host.js",
+  "exports": {
+    ".": "./host.js",
+    "./client": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-model-selection",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check host.js",
+    "test": "node verify-client.cjs"
+  },
+  "keywords": [
+    "dsh",
+    "plugin",
+    "reasoning",
+    "effort",
+    "slider"
+  ],
+  "author": "June M (原版) / 本地适配",
+  "license": "MIT"
+}

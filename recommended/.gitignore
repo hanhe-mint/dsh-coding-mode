@@ -1,0 +1,16 @@
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
+tmp/
+.tmp/
+coverage/
+*.bak
+*.bak.*
+backups/

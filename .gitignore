@@ -1,0 +1,17 @@
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
+tmp/
+.tmp/
+coverage/
+*.bak
+*.bak.*
+# 备份目录（开发期产物，不进仓库）
+backups/

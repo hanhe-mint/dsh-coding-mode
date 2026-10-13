@@ -1,0 +1,13 @@
+# @local/dsh-effort-switcher bundle patch。
+#
+# 基于 lemonorangeapple/dsh-effort-switcher 修改：
+#   - 原版声明支持 DSH 0.1.0-rc.6，本机是 0.2.0-rc.2，因此补齐了 dsh.client.inject
+#     的依赖声明（原版缺 ui-conversation / ui-renderer / locale）。
+#   - 包名改为 @local/*，以便用 link: 装进桌面的 desktop profile。
+#
+# ⚠️ 新增条目必须写在 `insert:` 下面。没有 `insert` 的补丁是**覆盖补丁**，
+#    用 id 匹配**已存在**的条目；匹配不到只打一条 warning 然后**跳过** ——
+#    也就是"插件根本没被加载"，而且不报错。
+- insert:
+    - id: effort-switcher
+      name: '@local/dsh-effort-switcher'

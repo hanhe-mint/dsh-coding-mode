@@ -1,0 +1,37 @@
+{
+  "name": "@local/dsh-coding-mode",
+  "version": "0.5.0",
+  "private": true,
+  "type": "module",
+  "description": "编程模式：拆成「顶层可寻址的设置宿主」+「preset 子插件」两半，16 个 volatile 配置字段可在设置页编辑，自带可视化设置页，并含首轮分类 / persona / 近场引导 / 阶段指引 / 交付门 / 子代理分档 / 运行统计。",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./preset": "./preset.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings-plugins"
+      ],
+      "external": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "meta": {
+    "title": "编程模式",
+    "description": "编码专用的工作流模式：中文协作协议（反刍抑制 / 深度匹配 / 强制发散 / 三重验证）+ 计划模式下对 write、edit 的真拦截门禁 + 首轮任务分类与 persona 注入 + 近场引导 + 四阶段指引 + 交付门 + 子代理自动分档。只分 flash / pro 两档，provider、model、推理强度全部可在设置页配置，默认走官方渠道。不含长期记忆。"
+  }
+}

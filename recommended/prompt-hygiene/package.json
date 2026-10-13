@@ -1,0 +1,27 @@
+{
+  "name": "dsh-prompt-hygiene",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "提示词卫生：在系统提示词里注入与模式无关的省 token 规则（不灌全量输出、大读取交子代理、命令输出截断、换任务开新会话）。顶层注册 → 对所有模式生效。",
+  "main": "index.js",
+  "license": "MIT",
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "token-efficiency", "context-hygiene"],
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": ["index.js", "cordis.patch.yml"],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "meta": {
+    "title": "提示词卫生",
+    "description": "把与模式无关的省 token 规则写进系统提示词：不灌全量输出、大读取交子代理、命令输出截断、换任务开新会话。顶层注册，所有模式（含子代理）都生效，可在设置页改文本或关掉。"
+  }
+}

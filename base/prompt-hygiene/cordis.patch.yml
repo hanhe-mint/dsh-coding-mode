@@ -1,0 +1,19 @@
+# dsh-prompt-hygiene bundle 层。
+#
+# 只插一行：**顶层行**，指向包入口 index.js。
+#
+# 为什么必须是顶层行（与 `@local/dsh-language-guard` 同源的理由）：
+#   本包装的是**与模式无关**的省 token 规则，必须对所有 preset 生效。
+#   DSH 的顶层注册落在提示段的 `ScopedLayers.global` 全局层，装配走 `merge()` 时
+#   全局层永远先铺底、作用域层只覆盖同名段；而 agent 的 scope 父链是空的，
+#   不存在能遮蔽它的作用域。所以顶层一行 = 所有 preset（含子代理）都拿到。
+#
+#   反例（真实踩过）：语言指令曾写在 `@local/dsh-coding-mode` 的 preset 半侧，
+#   只有编程模式的 agent 有它 —— 换 standard preset 就没了。
+#
+# ⚠️ 语法提醒：**新增条目必须写在 `insert:` 下面**。
+#   没有 `insert` 的补丁是**覆盖补丁**，用 id 匹配**已存在**的条目；
+#   匹配不到只打一条 warning 然后**跳过** —— 也就是"插件根本没被加载"，而且不报错。
+- insert:
+    - id: prompt-hygiene
+      name: 'dsh-prompt-hygiene'

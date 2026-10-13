@@ -1,0 +1,26 @@
+diff --git a/lib/policy.js b/lib/policy.js
+index 19c595a9f1d730e1f7757e79903afeeb5f988b87..1b8b70350e52f1f107a97f3623865888e898042e 100644
+--- a/lib/policy.js
++++ b/lib/policy.js
+@@ -4,7 +4,20 @@ export const TOOLING_SECTION = 'dsh-ops:repository-tooling'
+ export const HOST_SHELL_SECTION = 'dsh-ops:host-shell-policy'
+ export const SECTION_ORDERS = Object.freeze({ [TOOLING_SECTION]: 3250 })
+ export const TOOL_PREFIX = 'ops_'
+-export const FILE_TOOLS = Object.freeze(['inspect_local_file', 'grep', 'glob', 'replace'])
++// ⚠️ 本地补丁（非上游）：移除了 'inspect_local_file' 与 'glob'。
++//
++// 原因：宿主已有同功能的 `glob` / `read` 工具，dsh-ops 的这两个是完全重叠，
++// 留着只是多占模型注意力。保留 'grep' 与 'replace' 是因为它们**能力独有**：
++//   · ops_grep   —— 有 count/summary 模式（比拿全量输出省 token）、支持 glob[] 批量与 ! 排除
++//   · ops_replace —— 唯一能做跨文件批量替换的（宿主 write/edit 只能单文件精确改）
++//
++// ⚠️ 这个常量是**唯一事实源**，同时决定「发布哪些工具」与「提示词表格列哪些工具」
++//    （见 lib/tools.js:571 的发布过滤 与 lib/policy.js:29 的 renderToolingPolicy）。
++//    所以必须在这里改，而不是用 DSH 的 tools.restrict 运行时屏蔽 —— 那样工具被隐藏
++//    但提示词表格仍会列出它们，模型会看到一张自己调不了的工具表，比不改更糟。
++//
++// 上游升级会覆盖本补丁 → 届时需重新应用（备份见 D:\.temp\11111\dsh\dsh-ops-install-2026-10\backups\）
++export const FILE_TOOLS = Object.freeze(['grep', 'replace'])
+ export const BACKGROUND_TOOLS = Object.freeze(['run_background', 'job_output', 'job_list', 'job_kill'])
+ export const SHELL_TOOLS = Object.freeze(['run', ...BACKGROUND_TOOLS])
+ // The plugin's second layer executes POSIX commands; pwsh7 uses the host tool.
