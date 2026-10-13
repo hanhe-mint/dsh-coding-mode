@@ -1,0 +1,19 @@
+# 统一换行符为 LF，避免 Windows/Linux 之间互相污染。
+#
+# 为什么需要：本仓库是在 Windows 上写的（开发时用 LF 写文件），
+# 但 Windows 版 git 默认 `core.autocrlf=true` 会在 checkout 时把 LF 换成 CRLF，
+# 于是"工作区看起来改过、diff 却只有换行差异"这类噪音会反复出现。
+# 插件代码是 JS/YAML，跑在 Node 上，LF 是安全且更通用的选择。
+* text=auto eol=lf
+
+# 明确标为二进制，不做任何换行转换
+*.png binary
+*.jpg binary
+*.ico binary
+*.zip binary
+*.7z binary
+*.gz binary
+
+# 补丁文件必须保持 LF —— pnpm 重放补丁时逐字节比对上下文，
+# 换行被改掉会导致补丁失配（表现为 dsh-ops 的改动悄悄失效）。
+*.patch text eol=lf
