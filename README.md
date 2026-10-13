@@ -136,20 +136,31 @@ DSH 内置选择器），与当前处于什么模式无关。**本仓库对它�
 
 ## 安装
 
+推荐用 **[Releases](https://github.com/hanhe-mint/dsh-coding-mode/releases)** 里的压缩包 ——
+它是自包含的，不用 clone，也不会被仓库里的开发文件干扰。
+
 ### 基础版
 
 ```bash
-git clone https://github.com/<你的用户名>/dsh-coding-mode.git
-dsh plugin --profile desktop add ./dsh-coding-mode/base
+# ① 下载并解压（在 Releases 页面下载 dsh-coding-mode-0.6.0-base.zip）
+dsh plugin --profile desktop add ./dsh-coding-mode-0.6.0-base
 ```
 
 ### 推荐版
 
 ```bash
-git clone https://github.com/<你的用户名>/dsh-coding-mode.git
-# 推荐版依赖 dsh-ops，先装它（必需，见上）
+# ① 先装 dsh-ops（必需，见上，约 600MB）
 dsh plugin --profile desktop add dsh-ops
-dsh plugin --profile desktop add ./dsh-coding-mode/recommended
+
+# ② 下载并解压 dsh-coding-mode-0.6.0-recommended.zip，然后：
+dsh plugin --profile desktop add ./dsh-coding-mode-0.6.0-recommended
+```
+
+### 从源码安装（想跟最新改动时）
+
+```bash
+git clone https://github.com/hanhe-mint/dsh-coding-mode.git
+dsh plugin --profile desktop add ./dsh-coding-mode/base        # 或 ./dsh-coding-mode/recommended
 ```
 
 **装完必须完全重启 DSH**，再在设置页确认已启用。
